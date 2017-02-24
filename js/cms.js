@@ -103,6 +103,9 @@ layui.define(['layer','element', 'fortree'], function(exports) {
 
                 //切换到指定索引的卡片
                 element.tabChange(tabfilter, tabindex);
+
+                //隐藏第一个切换卡的删除按钮
+                tabtitle.find('li').eq(0).find('i').hide();
             }
         });
     }
