@@ -74,12 +74,12 @@ layui.define(['layer','element', 'fortree'], function(exports) {
          * 监听侧边栏导航点击事件
          */
         element.on('nav('+navfilter+')', function(elem) {
-            var a         = elem.children('a');
-            var title     = a.text();
-            var src       = elem.children('a').attr('data-url');
-            var id        = elem.children('a').attr('data-id');
-            var iframe    = tabcontent.find('iframe[data-id='+id+']').eq(0);
-            var tabindex  = tabtitle.children('li').length;
+            var a        = elem.children('a');
+            var title    = a.text();
+            var src      = elem.children('a').attr('data-url');
+            var id       = elem.children('a').attr('data-id');
+            var iframe   = tabcontent.find('iframe[data-id='+id+']').eq(0);
+            var tabindex = tabtitle.children('li').length;
 
             if(src != undefined && src != null && id != undefined && id != null) {
                 if(iframe.length) { //存在 iframe
@@ -87,12 +87,13 @@ layui.define(['layer','element', 'fortree'], function(exports) {
                     tabindex = iframe.attr('data-tabindex');
                 }else{ //不存在 iframe
                     //显示加载层
-                    layer.load();
+                    var tmpIndex = layer.load();
+                    //设置1秒后再次关闭loading
                     setTimeout(function() {
-                        layer.closeAll('loading');
-                    }, 300);
+                        layer.close(tmpIndex);
+                    }, 1000);
                     //拼接iframe
-                    var iframe = '<iframe';
+                    var iframe = '<iframe onload="layui.layer.close('+tmpIndex+')"';
                     iframe += ' src="'+src+'" data-id="'+id+'" data-tabindex="'+tabindex+'"';
                     iframe += ' style="width: 100%; height: '+tabcontent.height()+'px; border: 0px;"';
                     iframe += '></iframe>';
