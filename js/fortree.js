@@ -6,12 +6,12 @@ layui.define(function(exports) {
      * 导出接口
      */
     exports('fortree', function (arr, idname, pidname, topid) {
-        var _that = this; //对象本身
+        var _that     = this; //对象本身
         var _father   = []; //所有顶级节点
         var _children = []; //所有子节点
-        var _idname  = idname  || 'id'; //id名称
-        var _pidname = pidname || 'pid'; //父id名称
-        var _topid   = topid   || 0; //顶级节点父id
+        var _idname   = idname  || 'id'; //id名称
+        var _pidname  = pidname || 'pid'; //父id名称
+        var _topid    = topid   || 0; //顶级节点父id
 
         for(var i in arr) {
             if(arr[i][_pidname] == _topid) {
@@ -38,7 +38,7 @@ layui.define(function(exports) {
          */
         this.callAfter  = function(v, k) {};
         /**
-         * 循环之后回到
+         * 循环之后回调
          */
         this.forAfter   = function(v, k, hasChildren) {};
 
@@ -67,7 +67,7 @@ layui.define(function(exports) {
 
             for(var i in arr) {
                 var children = _that.getChildren(arr[i][_idname]);
-                var counter = children.length;
+                var counter  = children.length;
 
                 _that.forBefore(arr[i], i, counter);
                 _that.forcurr(arr[i], i, counter);

@@ -105,7 +105,7 @@ layui.define(['layer','element', 'fortree'], function(exports) {
                 element.tabChange(tabfilter, tabindex);
 
                 //隐藏第一个切换卡的删除按钮
-                tabtitle.find('li').eq(0).find('i').hide();
+                if(tabindex == 0) tabtitle.find('li').eq(0).find('i').hide();
             }
         });
     }
