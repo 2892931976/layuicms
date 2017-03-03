@@ -79,7 +79,7 @@ layui.define(['layer','element', 'fortree'], function(exports) {
             var src      = elem.children('a').attr('data-url');
             var id       = elem.children('a').attr('data-id');
             var iframe   = tabcontent.find('iframe[data-id='+id+']').eq(0);
-            var tabindex = tabtitle.children('li').length;
+            var tabindex = (new Date()).getTime();
 
             if(src != undefined && src != null && id != undefined && id != null) {
                 if(iframe.length) { //存在 iframe
@@ -98,14 +98,14 @@ layui.define(['layer','element', 'fortree'], function(exports) {
                     iframe += ' style="width: 100%; height: '+tabcontent.height()+'px; border: 0px;"';
                     iframe += '></iframe>';
                     //顶部切换卡新增一个卡片
-                    element.tabAdd(tabfilter, {title: title, content: iframe});
+                    element.tabAdd(tabfilter, {title: title, content: iframe, id: 'index-'+tabindex});
                 }
 
                 //切换到指定索引的卡片
-                element.tabChange(tabfilter, tabindex);
+                element.tabChange(tabfilter, 'index-'+tabindex);
 
                 //隐藏第一个切换卡的删除按钮
-                if(tabindex == 0) tabtitle.find('li').eq(0).find('i').hide();
+                tabtitle.find('li').eq(0).find('i').hide();
             }
         });
     }
